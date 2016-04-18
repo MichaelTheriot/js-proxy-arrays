@@ -1,4 +1,6 @@
-var getProp = (target, property) => typeof property !== 'symbol' && target.length && property < 0 && property >= -target.length ? +property + target.length : property;
+var getProp = (target, property) => typeof property !== 'symbol' && target.length&& property < 0 && property >= -target.length
+  ? +property + target.length
+  : property;
 
 var handler = {
   get: (target, property, receiver) => Reflect.get(target, getProp(target, property), receiver),
