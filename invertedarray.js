@@ -8,7 +8,7 @@ var handler = {
 };
 
 var InvertedArray = new Proxy(function InvertedArray(arg1) {}, {
-  construct: (target, arguments, newTarget) => new Proxy(Reflect.construct(Array, arguments, InvertedArray), handler)
+  construct: (target, arguments, newTarget) => new Proxy(Reflect.construct(Array, arguments, newTarget), handler)
 });
 
 Reflect.setPrototypeOf(InvertedArray, Array);
