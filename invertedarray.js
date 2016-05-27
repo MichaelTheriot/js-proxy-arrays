@@ -7,11 +7,10 @@ var handler = {
   set: (target, property, value, receiver) => Reflect.set(target, getProp(target, property), value, receiver)
 };
 
-var InvertedArray = new Proxy(function InvertedArray(arg1) {}, {
-  construct: (target, arguments, newTarget) => new Proxy(Reflect.construct(Array, arguments, newTarget), handler)
-});
-
+function InvertedArray(...args) {
+  return new Proxy(Reflect.construct(Array, args, new.target || InvertedArray), handler);
+}
 Reflect.setPrototypeOf(InvertedArray, Array);
-InvertedArray.prototype = Object.create(Array.prototype);
+Reflect.setPrototypeOf(InvertedArray.prototype, Array.prototype);
 
 module.exports = InvertedArray;
