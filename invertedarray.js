@@ -7,8 +7,8 @@ var handler = {
   set: (target, property, value, receiver) => Reflect.set(target, getProp(target, property), value, receiver)
 };
 
-function InvertedArray(...args) {
-  return new Proxy(Reflect.construct(Array, args, new.target || InvertedArray), handler);
+function InvertedArray(arg1) {
+  return new Proxy(Reflect.construct(Array, arguments, new.target || InvertedArray), handler);
 }
 Reflect.setPrototypeOf(InvertedArray, Array);
 Reflect.setPrototypeOf(InvertedArray.prototype, Array.prototype);
